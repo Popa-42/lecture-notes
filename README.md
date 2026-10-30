@@ -2,6 +2,8 @@
 
 A Typst template for mathematical lecture notes.
 
+## Example Usage
+
 ```typst
 #import "@local/lecture-notes:0.1.0": *
 
@@ -35,6 +37,24 @@ Style can be partially overridden:
   ),
 )
 ```
+
+## Installation
+
+Since I don't want to include this package in the official Typst package registry (bc I'm too shy), you have to install it manually. To do so, you have to first find out where Typst stores packages on your system. Run the following command in your terminal:
+
+```bash
+typst info
+```
+
+and search for the line "Package path". In this folder, create a new folder called `local` (if it doesn't exist yet) and then simply clone this repository into a subfolder called `lecture-notes`. When you're done, the path to the `typst.toml` file should look like this:
+
+```
+<package path>/local/lecture-notes/0.1.0/typst.toml
+```
+
+Now you're ready to type your lecture notes. Enjoy :)
+
+## Components
 
 The package contains the following components: `lecture-notes`, `title-page`, `lecture`, `definition`, `axiom`, `theorem`, `lemma`, `corollary`, `exercise`, `qed`, `qed-equation`, `Im`, `Re` and `ord`.
 
