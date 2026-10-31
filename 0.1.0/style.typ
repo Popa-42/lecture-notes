@@ -20,18 +20,23 @@
           lecture => lecture.location().page() < page-number,
         )
 
-        if lectures.len() > 0 {
-          let current = lectures.last().value
-          set text(size: 0.8em)
+        set text(size: 0.8em, font: active-theme.text.sans-font)
+        let headings = query(selector(heading.where(level: 1)).before(here()))
 
-          grid(
-            columns: (1fr, 2fr, 1fr),
-            align: (start, center, end),
-            if seminar == none { [] } else { [*#seminar*] },
-            [#current.prefix #current.number#if current.title != none [: #current.title]],
-            text(fill: active-theme.colors.text)[#current.date],
-          )
-        }
+        grid(
+          columns: (1fr, 2fr, 1fr),
+          align: (start, center, end),
+          if seminar == none { [] } else { seminar },
+          if headings.len() > 1 {
+            let last = headings.last()
+            show linebreak: none
+            [*#last.body*]
+          },
+          if lectures.len() > 0 {
+            let current = lectures.last().value
+            text(fill: active-theme.colors.text)[#current.prefix #current.number, #current.date]
+          },
+        )
       }
     },
   )

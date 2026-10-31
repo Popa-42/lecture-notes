@@ -9,7 +9,7 @@
   colors: (
     primary: eastern,
     accent: aqua,
-    text: eastern.darken(40%),
+    text: eastern.darken(20%),
     stroke: eastern.lighten(50%),
     code-border: gray,
     code-inline-border: rgb("CCCCCC"),
