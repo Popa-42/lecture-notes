@@ -23,20 +23,23 @@
         set text(size: 0.8em, font: active-theme.text.sans-font)
         let headings = query(selector(heading.where(level: 1)).before(here()))
 
-        grid(
-          columns: (1fr, 2fr, 1fr),
-          align: (start, center, end),
-          if seminar == none { [] } else { seminar },
-          if headings.len() > 1 {
-            let last = headings.last()
-            show linebreak: none
-            [*#last.body*]
-          },
-          if lectures.len() > 0 {
-            let current = lectures.last().value
-            text(fill: active-theme.colors.text)[#current.prefix #current.number, #current.date]
-          },
-        )
+        if headings.len() > 1 {
+          let last = headings.last()
+
+          grid(
+            columns: (1fr, 2fr, 1fr),
+            align: (start, center, end),
+            if seminar == none { [] } else { seminar },
+            {
+              show linebreak: none
+              [*#last.body*]
+            },
+            if lectures.len() > 0 {
+              let current = lectures.last().value
+              text(fill: active-theme.colors.text)[#current.prefix #current.number, #current.date]
+            },
+          )
+        }
       }
     },
   )
@@ -47,10 +50,15 @@
   )
   show math.equation: set text(font: active-theme.text.math-font)
 
+  show heading: it => context {
+    set text(font: theme-state.get().text.sans-font)
+    show math.equation: set text(font: "Fira Math")
+    it
+  }
+
   show heading.where(level: 1): it => context {
     set text(
       size: 1.25em,
-      font: theme-state.get().text.sans-font,
       weight: 700,
       fill: theme-state.get().colors.text,
     )
@@ -70,7 +78,6 @@
   show heading.where(level: 2): it => context {
     set text(
       size: 1.15em,
-      font: theme-state.get().text.sans-font,
       weight: 700,
       fill: theme-state.get().colors.text,
     )
