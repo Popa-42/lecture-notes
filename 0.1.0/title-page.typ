@@ -30,7 +30,7 @@
   let authors = if type(authors) == array { authors } else { (authors,) }
   let many-authors = authors.len() > 1
 
-  set page(numbering: none)
+  set page(numbering: none, header: none, footer: none)
   set text(lang: language, size: page-grid)
   set align(center)
 
