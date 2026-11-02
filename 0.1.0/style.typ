@@ -36,7 +36,7 @@
             },
             if lectures.len() > 0 {
               let current = lectures.last().value
-              text(fill: active-theme.colors.text)[#current.prefix #current.number, #current.date]
+              [#current.prefix#{ if current.number != none [ #current.number] }, #current.date]
             },
           )
         }
