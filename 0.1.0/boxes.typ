@@ -38,7 +38,16 @@
   ]
 }
 
-#let _statement(kind, body, color, label: none, inline: false, breakable: true) = context {
+
+#let _statement(
+  kind,
+  body,
+  color,
+  label: none,
+  note: none,
+  inline: false,
+  breakable: true,
+) = context {
   let headings = counter(heading).get()
   let first = if headings.len() >= 1 { calc.max(1, headings.at(0)) } else { 1 }
   let second = if headings.len() >= 2 { calc.max(1, headings.at(1)) } else { 1 }
@@ -49,6 +58,7 @@
 
   context {
     let mark = statement.display(number => numbering("1.1.1", first, second, number))
+
     let heading = text(
       font: theme-state.get().text.sans-font,
       weight: 600,
@@ -56,13 +66,26 @@
       fill: color.darken(20%),
     )[#kind #mark#suffix.]
 
+    let header = if note == none {
+      heading
+    } else {
+      grid(
+        columns: (1fr, auto),
+        column-gutter: 12pt,
+        align: (left, right),
+
+        heading, text(size: 0.9em)[#note],
+      )
+    }
+
     if inline {
       _box([#heading #body], color.darken(20%), breakable: false)
     } else {
-      _box(body, color.darken(20%), header: heading, breakable: breakable)
+      _box(body, color.darken(20%), header: header, breakable: breakable)
     }
   }
 }
+
 
 #let statement-names = (
   en: (
@@ -83,61 +106,66 @@
 
 #let _statement-name(kind, lang) = statement-names.at(lang, default: statement-names.en).at(kind)
 
-#let definition(body, label: none, inline: false, breakable: true, lang: none) = context {
+#let definition(body, label: none, note: none, inline: false, breakable: true, lang: none) = context {
   let lang = if lang == none { theme-state.get().text.lang } else { lang }
   _statement(
     _statement-name("definition", lang),
     body,
     theme-state.get().statement-colors.definition,
     label: label,
+    note: note,
     inline: inline,
     breakable: breakable,
   )
 }
 
-#let axiom(body, label: none, inline: false, breakable: true, lang: none) = context {
+#let axiom(body, label: none, note: none, inline: false, breakable: true, lang: none) = context {
   let lang = if lang == none { theme-state.get().text.lang } else { lang }
   _statement(
     _statement-name("axiom", lang),
     body,
     theme-state.get().statement-colors.axiom,
     label: label,
+    note: note,
     inline: inline,
     breakable: breakable,
   )
 }
 
-#let theorem(body, label: none, inline: false, breakable: true, lang: none) = context {
+#let theorem(body, label: none, note: none, inline: false, breakable: true, lang: none) = context {
   let lang = if lang == none { theme-state.get().text.lang } else { lang }
   _statement(
     _statement-name("theorem", lang),
     body,
     theme-state.get().statement-colors.theorem,
     label: label,
+    note: note,
     inline: inline,
     breakable: breakable,
   )
 }
 
-#let lemma(body, label: none, inline: false, breakable: true, lang: none) = context {
+#let lemma(body, label: none, note: none, inline: false, breakable: true, lang: none) = context {
   let lang = if lang == none { theme-state.get().text.lang } else { lang }
   _statement(
     _statement-name("lemma", lang),
     body,
     theme-state.get().statement-colors.lemma,
     label: label,
+    note: note,
     inline: inline,
     breakable: breakable,
   )
 }
 
-#let corollary(body, label: none, inline: false, breakable: true, lang: none) = context {
+#let corollary(body, label: none, note: none, inline: false, breakable: true, lang: none) = context {
   let lang = if lang == none { theme-state.get().text.lang } else { lang }
   _statement(
     _statement-name("corollary", lang),
     body,
     theme-state.get().statement-colors.corollary,
     label: label,
+    note: note,
     inline: inline,
     breakable: breakable,
   )
