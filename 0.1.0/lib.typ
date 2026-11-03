@@ -3,4 +3,4 @@
 #import "title-page.typ": title-page
 #import "lecture.typ": lecture, lecture-counter, reset-lectures
 #import "boxes.typ": *
-#import "helpers.typ": grad, Im, Re, ord, qed, qed-equation, render-footnote-entry, ü
+#import "helpers.typ": Im, Re, chevrons, grad, ord, qed, qed-equation, render-footnote-entry, ü

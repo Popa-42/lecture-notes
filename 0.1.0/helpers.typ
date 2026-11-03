@@ -11,13 +11,16 @@
   ]
 }
 
-#let _qed = $square$
+#let chevrons(..children) = {
+  let body = children.pos().join(", ")
+  math.lr([$chevron.l #body chevron.r$])
+}
 
+#let _qed = $square$
 #let qed-equation(eq) = {
   set math.equation(numbering: _ => _qed, number-align: right + bottom)
   eq
 }
-
 #let qed = [#h(1fr)#_qed]
 
 #let Im = math.op("Im")
