@@ -63,7 +63,7 @@
       font: theme-state.get().text.sans-font,
       size: 0.9em,
       fill: color.darken(20%),
-    )[*#kind #mark*#suffix]
+    )[*#kind #mark*#suffix*.*]
 
     let header = if note == none {
       heading
