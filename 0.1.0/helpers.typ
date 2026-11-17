@@ -30,3 +30,5 @@
 #let ord = math.op("ord")
 
 #let grad = math.op("grad")
+
+#let int = math.op("int")
