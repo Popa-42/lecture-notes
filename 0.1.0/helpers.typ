@@ -28,7 +28,7 @@
 #let ü = text(font: "Fira Sans", size: 0.85em, weight: 600)[[Ü]]
 
 #let ord = math.op("ord")
-
 #let grad = math.op("grad")
-
 #let int = math.op("int")
+#let Stab = math.op("Stab")
+#let sgn = math.op("sgn")
